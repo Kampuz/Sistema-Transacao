@@ -22,15 +22,12 @@ public class ControladorConta {
         return instance;
     }
 
-    public void criarConta(ArrayList<String> dadosConta) {
+    public void criarConta(String chave, double saldo) {
         log.info("Iniciando criacao da conta.");
         
-        String chave = dadosConta.get(0);
-        double saldoInicial = Double.parseDouble(dadosConta.get(1));
-        
-        log.debug("Dados para criar conta: chave (" + chave + ") & saldo inicial (" + saldoInicial + ")");
+        log.debug("Dados para criar conta: chave (" + chave + ") & saldo inicial (" + saldo + ")");
 
-        Conta novaConta = new Conta(chave, saldoInicial);
+        Conta novaConta = new Conta(chave, saldo);
         boolean ok = catalogoConta.adicionar(novaConta);
         
         if (ok) {
@@ -48,7 +45,7 @@ public class ControladorConta {
         if (ok) {
             log.info("Conta atualizada: " + contaAtualizada);
         } else {
-            log.warn("Não encontrou conta para atualizar: " + contaAtualizada.getChave());
+            log.warn("Nao encontrou conta para atualizar: " + contaAtualizada.getChave());
         }
     }
 

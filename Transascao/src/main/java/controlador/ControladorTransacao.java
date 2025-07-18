@@ -32,12 +32,8 @@ public class ControladorTransacao {
         return instance;
     }
     
-    public boolean realizarTransacao(ArrayList<String> dadosTransacao){
-        log.info("Iniciando transação com os seguintes dados: " + dadosTransacao);
-        
-        String chaveOrigem = dadosTransacao.get(0);
-        String chaveDestino = dadosTransacao.get(1);
-        double valor = Double.parseDouble(dadosTransacao.get(2));
+    public boolean realizarTransacao(String chaveOrigem, String chaveDestino, double valor){
+        log.info("Iniciando transacao com os seguintes dados: " + chaveOrigem + "; " + chaveDestino + "; " + valor + ";");
         
         Conta contaOrigem = controladorConta.buscarConta(chaveOrigem);
         Conta contaDestino = controladorConta.buscarConta(chaveDestino);
@@ -73,7 +69,7 @@ public class ControladorTransacao {
         controladorConta.atualizarConta(conta1);
         controladorConta.atualizarConta(conta2);
         log.info(String.format(
-            "Saldos atualizados – conta %s: %.2f; conta %s: %.2f",
+            "Saldos atualizados: conta %s: %.2f; conta %s: %.2f",
             conta1.getChave(), conta1.getSaldo(),
             conta2.getChave(), conta2.getSaldo()
         ));

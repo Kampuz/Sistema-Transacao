@@ -28,72 +28,67 @@ public class Formulario {
         }
         return instance;
     }
-
-    public ArrayList<String> imprimirTransacao() {
-        String chaveOrigem, chaveDestino;
-        double valor;
-        ArrayList<String> dadosTransacao = new ArrayList<>();
-        log.info("Mostrando Inteface: transacao");
+    
+    public String pedirChaveTransacao() {
+        String chave;
+        log.debug("Formulario: pedindo chave transacao.");
         
         do {
-            System.out.println("Digite sua chave: ");
-            chaveOrigem = scanner.nextLine();
-        } while (autenticador.chaveInvalida(chaveOrigem) || !autenticador.chaveUtilizada(chaveOrigem));
-
+            System.out.println("Digite a chave: ");
+            chave = scanner.nextLine();
+        } while(autenticador.chaveInvalida(chave) || !autenticador.chaveUtilizada(chave));
+        return chave;
+    }
+    
+    public String pedirChaveCriacao() {
+        String chave;
+        log.debug("Formulario: pedindo chave criacao conta");
+        
         do {
-            System.out.println("Digite a outra chave: ");
-            chaveDestino = scanner.nextLine();
-        } while (autenticador.chaveInvalida(chaveDestino) || !autenticador.chaveUtilizada(chaveDestino));
-
+            System.out.println("Digite a chave: ");
+            chave = scanner.nextLine();
+        } while(autenticador.chaveInvalida(chave) || autenticador.chaveUtilizada(chave));
+        return chave;
+    }
+    
+    public double pedirValorTransacao() {
+        double valor;
+        log.debug("Formulario: pedindo valor da transacao.");
+        
         do {
-            System.out.print("Digite o valor desejado: ");
+            System.out.println("Digite o valor: ");
             while (!scanner.hasNextDouble()) {
                 System.out.println("Por favor, digite um número válido.");
                 scanner.next(); // descarta entrada inválida
             }
             valor = scanner.nextDouble();
         } while (autenticador.valorInvalido(valor));
-
         scanner.nextLine();
-
-        dadosTransacao.add(chaveOrigem);
-        dadosTransacao.add(chaveDestino);
-        dadosTransacao.add("" + valor);
-
-        return dadosTransacao;
+        
+        return valor;
     }
-
-    public ArrayList<String> imprimirConta() {
-        
-        ArrayList<String> dadosConta = new ArrayList<>();
-        String chave;
-        double saldo;
-        
-        log.info("Mostrando Inteface: criacao conta");
+    
+    public double pedirValorSaldo() {
+        double valor;
+        log.debug("Formulario: pedindo valor do saldo.");
         
         do {
-            System.out.print("Digite a chave da nova conta: ");
-            chave = scanner.nextLine();
-        } while (autenticador.chaveUtilizada(chave) || autenticador.chaveInvalida(chave));
-
-        do {
-            System.out.print("Digite o saldo inicial: ");
+            System.out.println("Digite o valor: ");
             while (!scanner.hasNextDouble()) {
                 System.out.println("Por favor, digite um número válido.");
                 scanner.next(); // descarta entrada inválida
             }
-            saldo = scanner.nextDouble();
-        } while (autenticador.valorInvalido(saldo));
-
-        dadosConta.add(chave);
-        dadosConta.add("" + saldo);
-        return dadosConta;
+            valor = scanner.nextDouble();
+        } while (autenticador.valorInvalido(valor));
+        scanner.nextLine();
+        
+        return valor;
     }
     
     public int imprimirMenu() {
         int opcao;
         
-        log.info("Mostrando Inteface: menu");
+        log.debug("Mostrando Inteface: menu");
         System.out.println("Aperte [ENTER] para Continuar.");
         scanner.nextLine();
         System.out.println("\n==== MENU ====");
@@ -106,5 +101,15 @@ public class Formulario {
         opcao = Integer.parseInt(scanner.nextLine());
         
         return opcao;
+    }
+    
+    public void imprimirTransacao() {
+        log.debug("Mostrando Interface: transacao.");
+        System.out.println("\n==== TRANSACAO ====");
+    }
+    
+    public void imprimirCriacaoConta() {
+        log.debug("Mostrando Interface: criacao conta.");
+        System.out.println("\n==== NOVA CONTA ====");
     }
 }
