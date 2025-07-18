@@ -11,15 +11,16 @@ import controlador.ControladorConta;
  * @author MIGUEL CAMPOS
  */
 public class Autenticador {
+
     private static final Logger log = Logger.getInstance();
     private final ControladorConta controladorConta;
-    
+
     public Autenticador(ControladorConta controladorConta) {
         log.debug("Autenticador inicializado");
         this.controladorConta = controladorConta;
     }
-    
-    public boolean valorInvalido(double valor) {        
+
+    public boolean valorInvalido(double valor) {
         if (valor < 0.0) {
             log.error("Valor Invalido: valor negativo.");
             return true;
@@ -28,7 +29,7 @@ public class Autenticador {
             return false;
         }
     }
-    
+
     public boolean chaveInvalida(String chave) {
         if (chave.isBlank()) {
             log.error("Chave Invalida: chave vazia ou composta somente por espacos.");
@@ -38,12 +39,12 @@ public class Autenticador {
             return false;
         }
     }
-    
+
     public boolean chaveUtilizada(String chave) {
         if (controladorConta.buscarConta(chave) != null) {
             log.warn("Chave esta sendo utilizada.");
             return true;
-        } else { 
+        } else {
             log.warn("Chave nao esta sendo utilizada.");
             return false;
         }

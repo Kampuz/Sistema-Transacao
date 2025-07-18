@@ -23,12 +23,12 @@ public class CatalogoConta {
     }
 
     public boolean adicionar(Conta conta) {
-        
+
         if (this.buscarPorChave(conta.getChave()) != null) {
             log.error("conta ja existe" + conta);
             return false;
         }
-        
+
         boolean ok = contas.add(conta);
         if (ok) {
             log.debug("Conta adicionada: " + conta);
@@ -40,7 +40,7 @@ public class CatalogoConta {
 
     public boolean remover(Conta conta) {
         boolean ok = contas.remove(conta);
-        
+
         if (ok) {
             log.debug("Conta removida: " + conta);
         } else {
@@ -55,7 +55,7 @@ public class CatalogoConta {
             System.out.println(conta);
         }
     }
-    
+
     public Conta buscarPorChave(String chave) {
         for (Conta conta : contas) {
             if (conta.getChave().equals(chave)) {

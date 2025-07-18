@@ -21,9 +21,9 @@ public class CatalogoTransacao {
     public CatalogoTransacao() {
         log.debug("Inicializando Catalogo Transacao");
     }
-    
+
     public static CatalogoTransacao getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new CatalogoTransacao();
         }
         return instance;
@@ -55,24 +55,24 @@ public class CatalogoTransacao {
             System.out.println(transacao);
         }
     }
-    
+
     public void listarPorChave(int chave) {
         log.info("Listar transacoes envolvendo a conta com a chave = " + chave + ')');
         for (Transacao transacao : buscarPorChave(chave)) {
-                System.out.println(transacao);
+            System.out.println(transacao);
         }
     }
-    
+
     public ArrayList<Transacao> buscarPorChave(int chave) {
         ArrayList<Transacao> resultado = new ArrayList<>();
-        
+
         for (Transacao transacao : transacoes) {
             if (transacao.getPagador().getChave().equals(chave) || transacao.getRecebedor().getChave().equals(chave)) {
                 resultado.add(transacao);
                 log.debug("encontrou: " + transacao);
             }
         }
-        
+
         if (resultado.isEmpty()) {
             log.warn("Nenhuma transação encontrada para chave=" + chave);
         }

@@ -12,6 +12,7 @@ import java.util.Scanner;
  * @author MIGUEL CAMPOS
  */
 public class Formulario {
+
     private final Scanner scanner = new Scanner(System.in);
     private final Autenticador autenticador;
     private static final Logger log = Logger.getInstance();
@@ -20,33 +21,33 @@ public class Formulario {
         log.debug("Formulario inicializado");
         autenticador = new Autenticador(controladorConta);
     }
-    
+
     public String pedirChaveTransacao() {
         String chave;
         log.debug("Formulario: pedindo chave transacao.");
-        
+
         do {
             System.out.println("Digite a chave: ");
             chave = scanner.nextLine();
-        } while(autenticador.chaveInvalida(chave) || !autenticador.chaveUtilizada(chave));
+        } while (autenticador.chaveInvalida(chave) || !autenticador.chaveUtilizada(chave));
         return chave;
     }
-    
+
     public String pedirChaveCriacao() {
         String chave;
         log.debug("Formulario: pedindo chave criacao conta");
-        
+
         do {
             System.out.println("Digite a chave: ");
             chave = scanner.nextLine();
-        } while(autenticador.chaveInvalida(chave) || autenticador.chaveUtilizada(chave));
+        } while (autenticador.chaveInvalida(chave) || autenticador.chaveUtilizada(chave));
         return chave;
     }
-    
+
     public double pedirValorTransacao() {
         double valor;
         log.debug("Formulario: pedindo valor da transacao.");
-        
+
         do {
             System.out.println("Digite o valor: ");
             while (!scanner.hasNextDouble()) {
@@ -56,14 +57,14 @@ public class Formulario {
             valor = scanner.nextDouble();
         } while (autenticador.valorInvalido(valor));
         scanner.nextLine();
-        
+
         return valor;
     }
-    
+
     public double pedirValorSaldo() {
         double valor;
         log.debug("Formulario: pedindo valor do saldo.");
-        
+
         do {
             System.out.println("Digite o valor: ");
             while (!scanner.hasNextDouble()) {
@@ -73,13 +74,13 @@ public class Formulario {
             valor = scanner.nextDouble();
         } while (autenticador.valorInvalido(valor));
         scanner.nextLine();
-        
+
         return valor;
     }
-    
+
     public int imprimirMenu() {
         int opcao;
-        
+
         log.debug("Mostrando Inteface: menu");
         System.out.println("Aperte [ENTER] para Continuar.");
         scanner.nextLine();
@@ -91,15 +92,15 @@ public class Formulario {
         System.out.println("0. Sair");
         System.out.print("Escolha uma opcao: ");
         opcao = Integer.parseInt(scanner.nextLine());
-        
+
         return opcao;
     }
-    
+
     public void imprimirTransacao() {
         log.debug("Mostrando Interface: transacao.");
         System.out.println("\n==== TRANSACAO ====");
     }
-    
+
     public void imprimirCriacaoConta() {
         log.debug("Mostrando Interface: criacao conta.");
         System.out.println("\n==== NOVA CONTA ====");
