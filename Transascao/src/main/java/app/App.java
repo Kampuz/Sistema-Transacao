@@ -4,7 +4,6 @@ import controlador.ControladorConta;
 import controlador.ControladorTransacao;
 import front.Formulario;
 import front.Logger;
-import java.util.ArrayList;
 
 /**
  *
@@ -12,14 +11,17 @@ import java.util.ArrayList;
  */
 public class App {
     
-    private final Formulario formulario = Formulario.getInstance();
-    private final ControladorConta controladorConta = ControladorConta.getInstance();
-    private final ControladorTransacao controladorTransacao = ControladorTransacao.getInstance();
+    private final Formulario formulario;
+    private final ControladorConta controladorConta;
+    private final ControladorTransacao controladorTransacao;
     private final Logger log = Logger.getInstance();
     
     private boolean continuar;
 
     public App() {
+        this.controladorConta = new ControladorConta();
+        this.controladorTransacao = new ControladorTransacao(controladorConta);
+        this.formulario = new Formulario(controladorConta);
         this.continuar = true;
     }
 
@@ -51,9 +53,11 @@ public class App {
     
     public void realizarTransacao() {
         formulario.imprimirTransacao();
+        
         String chaveUsuario = formulario.pedirChaveTransacao();
         String chaveRecebedor = formulario.pedirChaveTransacao();
         double valor = formulario.pedirValorTransacao();
+        
         controladorTransacao.realizarTransacao(chaveUsuario, chaveRecebedor, valor);
     }
     

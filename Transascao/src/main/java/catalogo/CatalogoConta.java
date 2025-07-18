@@ -14,25 +14,18 @@ import modelo.Conta;
  */
 public class CatalogoConta {
 
-    private static CatalogoConta instance;
-    private final ArrayList<Conta> contas = new ArrayList<>();
+    private final ArrayList<Conta> contas;
     private static final Logger log = Logger.getInstance();
 
-    private CatalogoConta() {
+    public CatalogoConta() {
         log.debug("Inicializando Catalogo Conta");
-    }
-
-    public static CatalogoConta getInstance(){
-        if (instance == null) {
-            instance = new CatalogoConta();
-        }
-        return instance;
+        this.contas = new ArrayList<>();
     }
 
     public boolean adicionar(Conta conta) {
         
         if (this.buscarPorChave(conta.getChave()) != null) {
-            log.error("conta já existe" + conta);
+            log.error("conta ja existe" + conta);
             return false;
         }
         
@@ -54,16 +47,6 @@ public class CatalogoConta {
             log.warn("Falha ao remover conta: " + conta);
         }
         return ok;
-    }
-    
-    public boolean atualizarConta(Conta contaAtualizada) {
-        for (Conta conta : contas) {
-            if (conta.getChave().equals(contaAtualizada.getChave())) {
-                conta.setSaldo(contaAtualizada.getSaldo());
-                return true;
-            }
-        }
-        return false;
     }
 
     public void listar() {

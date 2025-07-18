@@ -4,26 +4,19 @@
  */
 package front;
 
-import catalogo.CatalogoConta;
+import controlador.ControladorConta;
 
 /**
  *
  * @author MIGUEL CAMPOS
  */
 public class Autenticador {
-    private static Autenticador instance;
     private static final Logger log = Logger.getInstance();
-    private final CatalogoConta catalogoConta = CatalogoConta.getInstance();
+    private final ControladorConta controladorConta;
     
-    private Autenticador() {
+    public Autenticador(ControladorConta controladorConta) {
         log.debug("Autenticador inicializado");
-    }
-
-    public static Autenticador getInstance() {
-        if (instance == null) {
-            instance = new Autenticador();
-        }
-        return instance;
+        this.controladorConta = controladorConta;
     }
     
     public boolean valorInvalido(double valor) {        
@@ -47,7 +40,7 @@ public class Autenticador {
     }
     
     public boolean chaveUtilizada(String chave) {
-        if (catalogoConta.buscarPorChave(chave) != null) {
+        if (controladorConta.buscarConta(chave) != null) {
             log.warn("Chave esta sendo utilizada.");
             return true;
         } else { 

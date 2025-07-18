@@ -67,7 +67,7 @@ public class CatalogoTransacao {
         ArrayList<Transacao> resultado = new ArrayList<>();
         
         for (Transacao transacao : transacoes) {
-            if (transacao.getConta1().getChave().equals(chave) || transacao.getConta2().getChave().equals(chave)) {
+            if (transacao.getPagador().getChave().equals(chave) || transacao.getRecebedor().getChave().equals(chave)) {
                 resultado.add(transacao);
                 log.debug("encontrou: " + transacao);
             }

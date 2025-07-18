@@ -11,32 +11,32 @@ import java.time.LocalDateTime;
  * @author MIGUEL CAMPOS
  */
 public class Transacao {
-    private Conta conta1;
-    private Conta conta2;
+    private Conta pagador;
+    private Conta recebedor;
     private double valor;
-    private LocalDateTime data;
+    private LocalDateTime horario;
 
-    public Transacao(Conta conta1, Conta conta2, double valor) {
-        this.conta1 = conta1;
-        this.conta2 = conta2;
+    public Transacao(Conta pagador, Conta recebedor, double valor) {
+        this.pagador = pagador;
+        this.recebedor = recebedor;
         this.valor = valor;
-        this.data = LocalDateTime.now();
+        this.horario = LocalDateTime.now();
     }
 
-    public Conta getConta1() {
-        return conta1;
+    public Conta getPagador() {
+        return pagador;
     }
 
-    public void setConta1(Conta conta1) {
-        this.conta1 = conta1;
+    public void setPagador(Conta pagador) {
+        this.pagador = pagador;
     }
 
-    public Conta getConta2() {
-        return conta2;
+    public Conta getRecebedor() {
+        return recebedor;
     }
 
-    public void setConta2(Conta conta2) {
-        this.conta2 = conta2;
+    public void setRecebedor(Conta recebedor) {
+        this.recebedor = recebedor;
     }
 
     public double getValor() {
@@ -47,16 +47,16 @@ public class Transacao {
         this.valor = valor;
     }
 
-    public LocalDateTime getData() {
-        return data;
+    public LocalDateTime getHorario() {
+        return horario;
     }
 
-    public void setData(LocalDateTime data) {
-        this.data = data;
+    public void setHorario(LocalDateTime horario) {
+        this.horario = horario;
     }
     
     @Override
     public String toString() {
-        return "Contas: " + conta1 + " & " + conta2 + " | Valor: R$ " + valor + " | Horario: " + data;
+        return "Contas: " + pagador + " & " + recebedor + " | Valor: R$ " + valor + " | Horario: " + horario;
     }
 }

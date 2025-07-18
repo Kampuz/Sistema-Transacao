@@ -4,7 +4,7 @@
  */
 package front;
 
-import java.util.ArrayList;
+import controlador.ControladorConta;
 import java.util.Scanner;
 
 /**
@@ -12,21 +12,13 @@ import java.util.Scanner;
  * @author MIGUEL CAMPOS
  */
 public class Formulario {
-
-    private static Formulario instance;
     private final Scanner scanner = new Scanner(System.in);
-    private static final Autenticador autenticador = Autenticador.getInstance(); 
+    private final Autenticador autenticador;
     private static final Logger log = Logger.getInstance();
 
-    private Formulario() {
+    public Formulario(ControladorConta controladorConta) {
         log.debug("Formulario inicializado");
-    }
-    
-    public static Formulario getInstance() {
-        if (instance == null) {
-            instance = new Formulario();
-        }
-        return instance;
+        autenticador = new Autenticador(controladorConta);
     }
     
     public String pedirChaveTransacao() {
